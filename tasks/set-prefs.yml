@@ -21,5 +21,19 @@
     src: "{{ prefs_file }}"
     dest: "/tmp/{{ prefs_prefs_file }}"
 
+- name: Query the preference on the remote machine.
+  command: "defaults read {{ prefs_pref_name  }}"
+  register: preference
+  changed_when: false
+  failed_when:
+    - "preference.rc > 0"
+    - "'does not exist' not in preference.stdout"
+
+- name: Read the actual file.
+  command: "cat /tmp/{{ prefs_prefs_file }}"
+  changed_when: false
+  register: preference_file
+
 - name: Set preference using uploaded preference file.
   command: "defaults import {{ prefs_pref_name }} /tmp/{{ prefs_prefs_file }}"
+  when: "preference.stdout != preference_file.stdout"
