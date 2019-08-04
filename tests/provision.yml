@@ -3,6 +3,6 @@
   hosts: all
   gather_facts: true
   vars:
-    prefs_prefs_directory: "{{ playbook_dir }}/files"
+    prefs_prefs_directory: "tests/files"
   roles:
     - role: ansible-role-macos-prefs
