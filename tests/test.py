@@ -9,6 +9,6 @@ import testinfra.utils.ansible_runner
     ("com.googlecode.iterm2", "Name = Dev"),
 ])
 def test_preference_contents(host, domain, string):
-    contents = host.check_output("defaults read {} | grep ''".format(domain))
+    contents = host.check_output("defaults read {}".format(domain))
 
     assert string in contents
