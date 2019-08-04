@@ -2,7 +2,7 @@
 # tasks file for ansible-role-macos-prefs
 
 - name: Set up preferences for applications.
-  include_tasks: "tasks/set-prefs.yml"
+  include_tasks: "set-prefs.yml"
   loop: "{{ lookup('fileglob', prefs_prefs_directory + '/*', wantlist=True) }}"
   loop_control:
     loop_var: prefs_file
