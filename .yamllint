@@ -1,7 +1,7 @@
 extends: default
 
 ignore: |
-  ./tests/roles/
+  tests/
 
 rules:
   braces:
