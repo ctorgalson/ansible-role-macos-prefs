@@ -1,0 +1,39 @@
+---
+# Preference-setting tasks.
+#
+# Note about _getting_ apple preferences--the process works like this (using
+# Dock as the example app):
+#
+# 1. Find the namespace: `defaults read | grep dock`
+# 2. Export plist: `defaults export com.apple.dock > /tmp/com.apple.dock.plist`
+# 3. Convert plist to xml: `plutil -convert xml1 /tmp/com.apple.dock.plist`
+
+- name: Isolate the preference filename.
+  set_fact:
+    prefs_prefs_file: "{{ prefs_file | basename }}"
+
+- name: Isolate the preference namespace.
+  set_fact:
+    prefs_pref_name: "{{ prefs_prefs_file | regex_replace('\\.plist$', '') }}"
+
+- name: Copy preference file to remote.
+  copy:
+    src: "{{ prefs_file }}"
+    dest: "/tmp/{{ prefs_prefs_file }}"
+
+- name: Query the preference on the remote machine.
+  command: "defaults read {{ prefs_pref_name  }}"
+  register: preference
+  changed_when: false
+  failed_when:
+    - "preference.rc > 0"
+    - "'does not exist' not in preference.stderr"
+
+- name: Read the actual file.
+  command: "cat /tmp/{{ prefs_prefs_file }}"
+  changed_when: false
+  register: preference_file
+
+- name: Set preference using uploaded preference file.
+  command: "defaults import {{ prefs_pref_name }} /tmp/{{ prefs_prefs_file }}"
+  when: "preference.stdout != preference_file.stdout"

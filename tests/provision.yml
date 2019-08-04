@@ -1,7 +1,8 @@
 ---
-- name: Run ctorgalson.macosbox role on macOS infrastructure.
+- name: Run ctorgalson.macos-prefs role on macOS infrastructure.
   hosts: all
   gather_facts: true
-
+  vars:
+    prefs_prefs_directory: "tests/files"
   roles:
     - role: ansible-role-macos-prefs
