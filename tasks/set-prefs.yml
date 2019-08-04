@@ -27,7 +27,7 @@
   changed_when: false
   failed_when:
     - "preference.rc > 0"
-    - "'does not exist' not in preference.stdout"
+    - "'does not exist' not in preference.stderr"
 
 - name: Read the actual file.
   command: "cat /tmp/{{ prefs_prefs_file }}"
