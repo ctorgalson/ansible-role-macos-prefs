@@ -2,7 +2,6 @@
 - name: Prepare to run ctorgalson.macosbox role on macOS infrastructure.
   hosts: all
   gather_facts: true
-  become: true
   vars:
     homebrew_cask_apps:
       - "iterm2"
