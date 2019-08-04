@@ -1,5 +1,8 @@
 extends: default
 
+ignore: |
+  ./tests/roles
+
 rules:
   braces:
     max-spaces-inside: 1
