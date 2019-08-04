@@ -1,2 +1,2 @@
 exclude_paths:
-  - /Users/travis/build/ctorgalson/geerlingguy.homebrew
+  - ./tests/roles/
