@@ -1,2 +1,4 @@
 ---
 # defaults file for ansible-role-macos-prefs
+
+prefs_prefs_directory: "files/preferences"
