@@ -7,6 +7,8 @@ install:
   - ansible-galaxy install -r tests/requirements.yml -p tests/roles
   - mv tests/_ansible.cfg ./ansible.cfg
   - mv tests/_.ansible-lint ./.ansible-lint
+  - pwd
+  - ls -hal
 
 script:
   - yamllint .
